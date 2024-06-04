@@ -1,4 +1,4 @@
-﻿#include <iostream>
+#include <iostream>
 #include <cstring>
 
 using namespace std;
@@ -16,14 +16,12 @@ public:
         size = strlen(c_str);
         str = new char[size + 1];
         strcpy(str, c_str);
-        str[size] = '\0';
     }
 
     // Деструктор для освобождения выделенной памяти
     ~String()
     {
         delete[] str;
-        size = 0;
     }
 
     // Функция для добавления строки
@@ -52,24 +50,26 @@ public:
         return newString;
     }
 
-    //метод  compare, который сравнивает текущую строку с другой строкой и возвращает результат сравнения.
-    int compare(const String& otherString)
+    // Метод compare, который сравнивает текущую строку с другой строкой и возвращает результат сравнения.
+    int compare(const String& otherString) const
     {
-        return strcmp(str, otherString.str);//функция возвращает -1, 0, 1
+        return strcmp(str, otherString.str); // функция возвращает -1, 0, 1
     }
 
-    //методы toUpper и toLower(, которые преобразуют все символы строки в верхний или нижний регистр.
+    // Методы toUpper и toLower, которые преобразуют все символы строки в верхний или нижний регистр.
     void toUpper()
     {
-        for (int i = 0; i < strlen(str); i++)
-            str[i] = toupper(str[i]);//каждый член заменяем им же, но верхнего регистра
+        for (size_t i = 0; i < size; i++)
+            str[i] = toupper(str[i]); // каждый член заменяем им же, но верхнего регистра
     }
+
     void toLower()
     {
-        for (int i = 0; i < strlen(str); i++)
-            str[i] = tolower(str[i]);//каждый член заменяем им же, но верхнего регистра
+        for (size_t i = 0; i < size; i++)
+            str[i] = tolower(str[i]); // каждый член заменяем им же, но верхнего регистра
     }
-    void printttt()
+
+    void printttt() const
     {
         cout << str << endl;
     }
@@ -88,8 +88,8 @@ int main()
 
     String helloStr(hello);
     String worldStr(world);
-    helloStr.concat(worldStr);
-    helloStr.printttt();
+    String concatenatedStr = helloStr.concat(worldStr);
+    concatenatedStr.printttt();
 
     String a("Hello");
     String b("World");
@@ -98,5 +98,6 @@ int main()
     a.printttt();
     a.toLower();
     a.printttt();
+
     return 0;
 }
